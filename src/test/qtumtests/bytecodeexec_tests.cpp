@@ -109,7 +109,8 @@ void checkBCEResult(ByteCodeExecResult result, uint64_t usedGas, CAmount refundS
     BOOST_CHECK(result.refundSender == refundSender);
     BOOST_CHECK(result.refundOutputs.size() == nVouts);
     for(size_t i = 0; i < result.refundOutputs.size(); i++){
-        BOOST_CHECK(result.refundOutputs[i].scriptPubKey == CScript() << OP_DUP << OP_HASH160 << SENDERADDRESS.asBytes() << OP_EQUALVERIFY << OP_CHECKSIG);
+    	CScript script = CScript() << OP_DUP << OP_HASH160 << SENDERADDRESS.asBytes() << OP_EQUALVERIFY << OP_CHECKSIG;
+        BOOST_CHECK(result.refundOutputs[i].scriptPubKey == script);
     }
     BOOST_CHECK(result.valueTransfers.size() == nTxs);
 }

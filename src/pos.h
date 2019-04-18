@@ -18,7 +18,7 @@
 
 // To decrease granularity of timestamp
 // Supposed to be 2^n-1
-static const uint32_t STAKE_TIMESTAMP_MASK = 15;
+static const uint32_t STAKE_TIMESTAMP_MASK = 3;
 
 struct CStakeCache{
     CStakeCache(uint32_t blockFromTime_, CAmount amount_) : blockFromTime(blockFromTime_), amount(amount_){

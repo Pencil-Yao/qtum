@@ -198,9 +198,9 @@ public:
     CTestNetParams() {
         strNetworkID = "test";
         consensus.nSubsidyHalvingInterval = 985500; // qtum halving every 4 years
-//        consensus.BIP16Exception = uint256S("0x0000e803ee215c0684ca0d2f9220594d3f828617972aad66feb2ba51f5e14222");
+        consensus.BIP16Exception = uint256S("0000d66420fda8457b3cc9ff28c4eee57cf164823c537f734dbb36bf5091936a");
         consensus.BIP34Height = 0;
-//        consensus.BIP34Hash = uint256S("0x0000e803ee215c0684ca0d2f9220594d3f828617972aad66feb2ba51f5e14222");
+        consensus.BIP34Hash = uint256S("0000d66420fda8457b3cc9ff28c4eee57cf164823c537f734dbb36bf5091936a");
         consensus.BIP65Height = 0; // 00000000007f6655f22f98e72ed80d8b06dc761d5da09df0fa1dc4be4f861eb6
         consensus.BIP66Height = 0; // 000000002104c8c45e99a8853285a3b592602a3ccde2b832481da85e9e4ba182
         consensus.powLimit = uint256S("0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -249,13 +249,13 @@ public:
 //			consensus.hashGenesisBlock = genesis.GetHash();
 //			nonce++;
 //		}while(UintToArith256(consensus.hashGenesisBlock) > bnTarget);
+//        std::string hashStr = consensus.hashGenesisBlock.GetHex();
+//		std::string merkhashStr = genesis.hashMerkleRoot.GetHex();
 
         genesis = CreateGenesisBlock(1555500170, 0xe624, 0x1f00ffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        std::string hashStr = consensus.hashGenesisBlock.GetHex();
-        std::string merkhashStr = genesis.hashMerkleRoot.GetHex();
-//        assert(consensus.hashGenesisBlock == uint256S("0x0000e803ee215c0684ca0d2f9220594d3f828617972aad66feb2ba51f5e14222"));
-//        assert(genesis.hashMerkleRoot == uint256S("0xed34050eb5909ee535fcb07af292ea55f3d2f291187617b44d3282231405b96d"));
+        assert(consensus.hashGenesisBlock == uint256S("0000d66420fda8457b3cc9ff28c4eee57cf164823c537f734dbb36bf5091936a"));
+        assert(genesis.hashMerkleRoot == uint256S("7bc5b11f35cacb83a1948218b3ea89db346c581ee4ba4d354c3d09536bc4f721"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -279,7 +279,7 @@ public:
 
 //        checkpointData = {
 //            {
-//                {0, uint256S("0000e803ee215c0684ca0d2f9220594d3f828617972aad66feb2ba51f5e14222")},
+//                {0, uint256S("0000d66420fda8457b3cc9ff28c4eee57cf164823c537f734dbb36bf5091936a")},
 //                {5000, uint256S("000000302bc22f2f65995506e757fff5c824545db5413e871d57d27a0997e8a0")}, //last PoW block
 //                {77000, uint256S("f41e2e8d09bca38827c23cad46ed6d434902da08415d2314d0c8ce285b1970cb")},
 //                {230000, uint256S("cd17baf80fa817dd543b83897ccb1e07350019e5b812f4956f69efe855d62601")},

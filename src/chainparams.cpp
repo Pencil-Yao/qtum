@@ -250,7 +250,7 @@ public:
 //			nonce++;
 //		}while(UintToArith256(consensus.hashGenesisBlock) > bnTarget);
 
-        genesis = CreateGenesisBlock(1504695029, 0xe624, 0x1f00ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1555500170, 0xe624, 0x1f00ffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         std::string hashStr = consensus.hashGenesisBlock.GetHex();
         std::string merkhashStr = genesis.hashMerkleRoot.GetHex();

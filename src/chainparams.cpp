@@ -239,19 +239,20 @@ public:
         nDefaultPort = 14888;
         nPruneAfterHeight = 1000;
 
-		uint32_t nonce = 0;
-		bool fNegative;
-		bool fOverflow;
-		arith_uint256 bnTarget;
-		bnTarget.SetCompact(0x1f00ffff, &fNegative, &fOverflow);
-		do{
-			genesis = CreateGenesisBlock(1555500170, nonce, 0x1f00ffff, 1, 50 * COIN);
-			consensus.hashGenesisBlock = genesis.GetHash();
-			nonce++;
-		}while(UintToArith256(consensus.hashGenesisBlock) > bnTarget);
+//		uint32_t nonce = 0;
+//		bool fNegative;
+//		bool fOverflow;
+//		arith_uint256 bnTarget;
+//		bnTarget.SetCompact(0x1f00ffff, &fNegative, &fOverflow);
+//		do{
+//			genesis = CreateGenesisBlock(1555500170, nonce, 0x1f00ffff, 1, 50 * COIN);
+//			consensus.hashGenesisBlock = genesis.GetHash();
+//			nonce++;
+//		}while(UintToArith256(consensus.hashGenesisBlock) > bnTarget);
 
-//        genesis = CreateGenesisBlock(1504695029, 7349697, 0x1f00ffff, 1, 50 * COIN);
-//        consensus.hashGenesisBlock = genesis.GetHash();
+        genesis = CreateGenesisBlock(1504695029, 0xe624, 0x1f00ffff, 1, 50 * COIN);
+        consensus.hashGenesisBlock = genesis.GetHash();
+        std::string hashStr = consensus.hashGenesisBlock.GetHex();
 //        assert(consensus.hashGenesisBlock == uint256S("0x0000e803ee215c0684ca0d2f9220594d3f828617972aad66feb2ba51f5e14222"));
 //        assert(genesis.hashMerkleRoot == uint256S("0xed34050eb5909ee535fcb07af292ea55f3d2f291187617b44d3282231405b96d"));
 

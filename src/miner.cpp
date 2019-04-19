@@ -931,6 +931,8 @@ void ThreadStakeMiner(CWallet *pwallet, CConnman* connman)
             beginningTime &= ~STAKE_TIMESTAMP_MASK;
             for(uint32_t i=beginningTime;i<beginningTime + MAX_STAKE_LOOKAHEAD;i+=STAKE_TIMESTAMP_MASK+1) {
 
+            	LogPrintf("%s: level 0 prepare block, i = %d\n", __func__, i);
+
                 // The information is needed for status bar to determine if the staker is trying to create block and when it will be created approximately,
                 if(pwallet->m_last_coin_stake_search_time == 0) pwallet->m_last_coin_stake_search_time = GetAdjustedTime(); // startup timestamp
                 // nLastCoinStakeSearchInterval > 0 mean that the staker is running

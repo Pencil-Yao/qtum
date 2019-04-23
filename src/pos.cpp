@@ -83,17 +83,18 @@ bool CheckStakeKernelHash(CBlockIndex* pindexPrev, unsigned int nBits, uint32_t 
             hashProofOfStake.ToString());
     }
 
+    if (g_logger->WillLogCategory(BCLog::COINSTAKE) && !fPrintProofOfStake)
+    {
+        LogPrintf("CheckStakeKernelHash() : check modifier=%s nTimeBlockFrom=%u nPrevout=%u nTimeBlock=%u hashProof=%s, bnTarget=%s\n",
+            nStakeModifier.GetHex().c_str(),
+            blockFromTime, prevout.n, nTimeBlock,
+            hashProofOfStake.ToString(),
+			bnTarget.GetHex());
+    }
+
     // Now check if proof-of-stake hash meets target protocol
     if (UintToArith256(hashProofOfStake) > bnTarget)
         return false;
-
-    if (g_logger->WillLogCategory(BCLog::COINSTAKE) && !fPrintProofOfStake)
-    {
-        LogPrintf("CheckStakeKernelHash() : check modifier=%s nTimeBlockFrom=%u nPrevout=%u nTimeBlock=%u hashProof=%s\n",
-            nStakeModifier.GetHex().c_str(),
-            blockFromTime, prevout.n, nTimeBlock,
-            hashProofOfStake.ToString());
-    }
 
     return true;
 }

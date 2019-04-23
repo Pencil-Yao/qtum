@@ -3593,7 +3593,8 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, con
 
     auto testEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> testDiff = testEnd-testStart;
-    LogPrintf("The same time mining, nTime=%d, testHashTimes=%d: %0.4lfs, KHashesPerSecond=%0.2lfKH/s, SelectCoinsForStaking=%0.4ldfs\n", nTimeBlock, testHashTimes, testDiff.count(), testHashTimes/1000/testDiff.count(), selectStart-selectEnd);
+    std::chrono::duration<double> selectDiff = selectEnd-selectStart;
+    LogPrintf("The same time mining, nTime=%d, testHashTimes=%d: %0.4lfs, KHashesPerSecond=%0.2lfKH/s, SelectCoinsForStaking=%0.4ldfs\n", nTimeBlock, testHashTimes, testDiff.count(), testHashTimes/1000/testDiff.count(), selectDiff.count());
 
     if (nCredit == 0 || nCredit > nBalance - m_reserve_balance)
         return false;

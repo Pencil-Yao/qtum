@@ -931,8 +931,6 @@ void ThreadStakeMiner(CWallet *pwallet, CConnman* connman)
             beginningTime &= ~STAKE_TIMESTAMP_MASK;
             for(uint32_t i=beginningTime;i<beginningTime + MAX_STAKE_LOOKAHEAD;i+=STAKE_TIMESTAMP_MASK+1) {
 
-            	LogPrintf("%s: level 0 prepare block, i = %d\n", __func__, i);
-
                 // The information is needed for status bar to determine if the staker is trying to create block and when it will be created approximately,
                 if(pwallet->m_last_coin_stake_search_time == 0) pwallet->m_last_coin_stake_search_time = GetAdjustedTime(); // startup timestamp
                 // nLastCoinStakeSearchInterval > 0 mean that the staker is running
@@ -943,7 +941,6 @@ void ThreadStakeMiner(CWallet *pwallet, CConnman* connman)
                 std::shared_ptr<CBlock> pblock = std::make_shared<CBlock>(pblocktemplate->block);
                 if (SignBlock(pblock, *pwallet, nTotalFees, i)) {
 
-                	LogPrintf("%s: level 1 SignBlock Pass, i = %d\n", __func__, i);
                     // increase priority so we can build the full PoS block ASAP to ensure the timestamp doesn't expire
                     SetThreadPriority(THREAD_PRIORITY_ABOVE_NORMAL);
 
@@ -966,7 +963,6 @@ void ThreadStakeMiner(CWallet *pwallet, CConnman* connman)
                     // Sign the full block and use the timestamp from earlier for a valid stake
                     std::shared_ptr<CBlock> pblockfilled = std::make_shared<CBlock>(pblocktemplatefilled->block);
                     if (SignBlock(pblockfilled, *pwallet, nTotalFees, i)) {
-                    	LogPrintf("%s: level 2 SignBlock Pass, i = %d\n", __func__, i);
                         // Should always reach here unless we spent too much time processing transactions and the timestamp is now invalid
                         // CheckStake also does CheckBlock and AcceptBlock to propogate it to the network
                         bool validBlock = false;

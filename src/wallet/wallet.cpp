@@ -34,6 +34,7 @@
 #include <algorithm>
 #include <assert.h>
 #include <future>
+#include <chrono>
 
 #include <boost/algorithm/string/replace.hpp>
 
@@ -3508,8 +3509,13 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, con
     }
     int64_t nCredit = 0;
     CScript scriptPubKeyKernel;
+
+    uint64_t testHashTimes = 0;
+    auto testStart = std::chrono::high_resolution_clock::now();
+
     for(const std::pair<const CWalletTx*,unsigned int> &pcoin : setCoins)
     {
+    	testHashTimes++;
         bool fKernelFound = false;
         boost::this_thread::interruption_point();
         // Search backward in time from the given txNew timestamp
@@ -3580,6 +3586,10 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, con
         if (fKernelFound)
             break; // if kernel is found stop searching
     }
+
+    auto testEnd = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> testDiff = testEnd-testStart;
+    LogPrintf("The same time mining, nTime=%d, testHashTimes=%d: %0.4lf, KHashesPerSecond=%0.2lf", nTimeBlock, testHashTimes, testDiff.count(), testHashTimes/1000/testDiff.count());
 
     if (nCredit == 0 || nCredit > nBalance - m_reserve_balance)
         return false;

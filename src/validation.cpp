@@ -4042,7 +4042,7 @@ bool CheckFirstCoinstakeOutput(const CBlock& block)
     return true;
 }
 
-#ifdef ENABLE_WALLET
+//#ifdef ENABLE_WALLET
 // novacoin: attempt to generate suitable proof-of-stake
 bool SignBlock(std::shared_ptr<CBlock> pblock, CWallet& wallet, const CAmount& nTotalFees, uint32_t nTime)
 {
@@ -4089,7 +4089,7 @@ bool SignBlock(std::shared_ptr<CBlock> pblock, CWallet& wallet, const CAmount& n
 
     return false;
 }
-#endif
+//#endif
 
 bool GetBlockPublicKey(const CBlock& block, std::vector<unsigned char>& vchPubKey)
 {

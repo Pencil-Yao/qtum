@@ -262,6 +262,10 @@ public:
         // nodes with support for servicebits filtering should be at the top
         vSeeds.emplace_back("qtum4.dynu.net"); // Qtum testnet
 
+        vSeeds.emplace_back("191.167.2.1:14888");
+        vSeeds.emplace_back("192.168.11.54:14888");
+        vSeeds.emplace_back("191.167.2.249:24888");
+
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,120);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,110);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);

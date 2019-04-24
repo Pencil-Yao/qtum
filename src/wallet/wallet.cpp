@@ -3594,7 +3594,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, con
     auto testEnd = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> testDiff = testEnd-testStart;
     std::chrono::duration<double> selectDiff = selectEnd-selectStart;
-    LogPrintf("The same time mining, nTime=%d, testHashTimes=%d: %0.4lfs, KHashesPerSecond=%0.2lfKH/s, SelectCoinsForStaking=%0.4ldfs\n", nTimeBlock, testHashTimes, testDiff.count(), testHashTimes/1000/testDiff.count(), selectDiff.count());
+    LogPrintf("The same time mining, nTime=%d, testHashTimes=%d: %0.4lfs, KHashesPerSecond=%0.2lfKH/s, SelectCoinsForStaking=%0.4lfs\n", nTimeBlock, testHashTimes, testDiff.count(), testHashTimes/1000/testDiff.count(), selectDiff.count());
 
     if (nCredit == 0 || nCredit > nBalance - m_reserve_balance)
         return false;
@@ -3610,6 +3610,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, con
             if (txNew.vin.size() >= GetStakeMaxCombineInputs())
                 break;
             // Stop adding inputs if reached reserve limit
+            CAmount value = pcoin.first->tx->vout[pcoin.second].nValue;
             if (nCredit + pcoin.first->tx->vout[pcoin.second].nValue > nBalance - m_reserve_balance)
                 break;
             // Do not add additional significant input
